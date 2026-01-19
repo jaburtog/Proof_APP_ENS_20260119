@@ -12,7 +12,7 @@
         <class>com.ens.crud.domain.entity.Autoriz</class>
         <properties>
             <property name="jakarta.persistence.schema-generation.database.action" value="create"/>
-            <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.DerbyDialect"/>
             <property name="hibernate.show_sql" value="true"/>
         </properties>
     </persistence-unit>

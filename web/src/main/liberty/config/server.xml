@@ -14,13 +14,14 @@
         <classloader apiTypeVisibility="+third-party"/>
     </webApplication>
 
+    <!-- Development database configuration - For production, use persistent database -->
     <dataSource id="crudDS" jndiName="jdbc/crudDS">
-        <jdbcDriver libraryRef="h2-lib"/>
+        <jdbcDriver libraryRef="derby-lib"/>
         <properties.derby.embedded databaseName="memory:crudDB" createDatabase="create"/>
     </dataSource>
 
-    <library id="h2-lib">
-        <fileset dir="${shared.resource.dir}/h2" includes="*.jar"/>
+    <library id="derby-lib">
+        <fileset dir="${server.config.dir}/derby" includes="*.jar"/>
     </library>
 
     <cors domain="/"

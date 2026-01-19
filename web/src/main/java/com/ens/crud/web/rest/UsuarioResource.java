@@ -1,5 +1,6 @@
 package com.ens.crud.web.rest;
 
+import com.ens.crud.application.usecase.PerfilUseCase;
 import com.ens.crud.application.usecase.UsuarioUseCase;
 import com.ens.crud.domain.entity.Perfil;
 import com.ens.crud.domain.entity.Usuario;
@@ -18,6 +19,9 @@ public class UsuarioResource {
 
     @Inject
     private UsuarioUseCase usuarioUseCase;
+
+    @Inject
+    private PerfilUseCase perfilUseCase;
 
     @GET
     public Response getAllUsuarios() {
@@ -96,8 +100,8 @@ public class UsuarioResource {
         usuario.setPassword(dto.getPassword());
         usuario.setActivo(dto.getActivo());
         if (dto.getPerfilId() != null) {
-            Perfil perfil = new Perfil();
-            perfil.setId(dto.getPerfilId());
+            Perfil perfil = perfilUseCase.getPerfilById(dto.getPerfilId())
+                .orElseThrow(() -> new IllegalArgumentException("Perfil not found"));
             usuario.setPerfil(perfil);
         }
         return usuario;
