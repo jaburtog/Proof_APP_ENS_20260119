@@ -1,0 +1,18 @@
+<div class="app-container">
+  <header>
+    <h1>{{ title }}</h1>
+    <nav>
+      <a routerLink="/usuarios" routerLinkActive="active">Usuarios</a>
+      <a routerLink="/perfiles" routerLinkActive="active">Perfiles</a>
+      <a routerLink="/aplicaciones" routerLinkActive="active">Aplicaciones</a>
+    </nav>
+  </header>
+  
+  <main>
+    <router-outlet></router-outlet>
+  </main>
+  
+  <footer>
+    <p>&copy; 2026 CRUD Application - Jakarta EE 10 + Angular 19</p>
+  </footer>
+</div>

@@ -1,0 +1,96 @@
+<div class="container">
+  <h2>Gestión de Usuarios</h2>
+  
+  <button class="btn btn-primary" (click)="newUsuario()" *ngIf="!showForm">
+    Nuevo Usuario
+  </button>
+
+  <div class="form-container" *ngIf="showForm">
+    <h3>{{ isEditing ? 'Editar' : 'Nuevo' }} Usuario</h3>
+    <form (ngSubmit)="saveUsuario()">
+      <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" id="username" [(ngModel)]="selectedUsuario.username" 
+               name="username" required [disabled]="isEditing">
+      </div>
+
+      <div class="form-group">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" [(ngModel)]="selectedUsuario.nombre" 
+               name="nombre" required>
+      </div>
+
+      <div class="form-group">
+        <label for="apellido">Apellido:</label>
+        <input type="text" id="apellido" [(ngModel)]="selectedUsuario.apellido" 
+               name="apellido" required>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" [(ngModel)]="selectedUsuario.email" 
+               name="email" required>
+      </div>
+
+      <div class="form-group" *ngIf="!isEditing">
+        <label for="password">Password:</label>
+        <input type="password" id="password" [(ngModel)]="selectedUsuario.password" 
+               name="password" required>
+      </div>
+
+      <div class="form-group">
+        <label for="perfil">Perfil:</label>
+        <select id="perfil" [(ngModel)]="selectedUsuario.perfilId" name="perfil">
+          <option [value]="undefined">-- Seleccione un perfil --</option>
+          <option *ngFor="let perfil of perfiles" [value]="perfil.id">
+            {{ perfil.nombre }}
+          </option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>
+          <input type="checkbox" [(ngModel)]="selectedUsuario.activo" name="activo">
+          Activo
+        </label>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-success">Guardar</button>
+        <button type="button" class="btn btn-secondary" (click)="cancelForm()">Cancelar</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="table-container" *ngIf="!showForm">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Username</th>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Email</th>
+          <th>Perfil</th>
+          <th>Activo</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let usuario of usuarios">
+          <td>{{ usuario.id }}</td>
+          <td>{{ usuario.username }}</td>
+          <td>{{ usuario.nombre }}</td>
+          <td>{{ usuario.apellido }}</td>
+          <td>{{ usuario.email }}</td>
+          <td>{{ usuario.perfilNombre || '-' }}</td>
+          <td>{{ usuario.activo ? 'Sí' : 'No' }}</td>
+          <td>
+            <button class="btn btn-sm btn-info" (click)="editUsuario(usuario)">Editar</button>
+            <button class="btn btn-sm btn-danger" (click)="deleteUsuario(usuario.id)">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

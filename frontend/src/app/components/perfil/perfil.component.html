@@ -1,0 +1,60 @@
+<div class="container">
+  <h2>Gestión de Perfiles</h2>
+  
+  <button class="btn btn-primary" (click)="newPerfil()" *ngIf="!showForm">
+    Nuevo Perfil
+  </button>
+
+  <div class="form-container" *ngIf="showForm">
+    <h3>{{ isEditing ? 'Editar' : 'Nuevo' }} Perfil</h3>
+    <form (ngSubmit)="savePerfil()">
+      <div class="form-group">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" [(ngModel)]="selectedPerfil.nombre" name="nombre" required>
+      </div>
+
+      <div class="form-group">
+        <label for="descripcion">Descripción:</label>
+        <textarea id="descripcion" [(ngModel)]="selectedPerfil.descripcion" name="descripcion"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>
+          <input type="checkbox" [(ngModel)]="selectedPerfil.activo" name="activo">
+          Activo
+        </label>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-success">Guardar</button>
+        <button type="button" class="btn btn-secondary" (click)="cancelForm()">Cancelar</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="table-container" *ngIf="!showForm">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Descripción</th>
+          <th>Activo</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let perfil of perfiles">
+          <td>{{ perfil.id }}</td>
+          <td>{{ perfil.nombre }}</td>
+          <td>{{ perfil.descripcion || '-' }}</td>
+          <td>{{ perfil.activo ? 'Sí' : 'No' }}</td>
+          <td>
+            <button class="btn btn-sm btn-info" (click)="editPerfil(perfil)">Editar</button>
+            <button class="btn btn-sm btn-danger" (click)="deletePerfil(perfil.id)">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  backend:
+    build: .
+    ports:
+      - "9080:9080"
+      - "9443:9443"
+    networks:
+      - crud-network
+    environment:
+      - JAVA_OPTS=-Xmx512m
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "4200:80"
+    networks:
+      - crud-network
+    depends_on:
+      - backend
+
+networks:
+  crud-network:
+    driver: bridge

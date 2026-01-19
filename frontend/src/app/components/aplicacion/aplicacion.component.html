@@ -1,0 +1,67 @@
+<div class="container">
+  <h2>Gestión de Aplicaciones</h2>
+  
+  <button class="btn btn-primary" (click)="newAplicacion()" *ngIf="!showForm">
+    Nueva Aplicación
+  </button>
+
+  <div class="form-container" *ngIf="showForm">
+    <h3>{{ isEditing ? 'Editar' : 'Nueva' }} Aplicación</h3>
+    <form (ngSubmit)="saveAplicacion()">
+      <div class="form-group">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" [(ngModel)]="selectedAplicacion.nombre" name="nombre" required>
+      </div>
+
+      <div class="form-group">
+        <label for="descripcion">Descripción:</label>
+        <textarea id="descripcion" [(ngModel)]="selectedAplicacion.descripcion" name="descripcion"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="url">URL:</label>
+        <input type="text" id="url" [(ngModel)]="selectedAplicacion.url" name="url">
+      </div>
+
+      <div class="form-group">
+        <label>
+          <input type="checkbox" [(ngModel)]="selectedAplicacion.activo" name="activo">
+          Activo
+        </label>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-success">Guardar</button>
+        <button type="button" class="btn btn-secondary" (click)="cancelForm()">Cancelar</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="table-container" *ngIf="!showForm">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Descripción</th>
+          <th>URL</th>
+          <th>Activo</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let aplicacion of aplicaciones">
+          <td>{{ aplicacion.id }}</td>
+          <td>{{ aplicacion.nombre }}</td>
+          <td>{{ aplicacion.descripcion || '-' }}</td>
+          <td>{{ aplicacion.url || '-' }}</td>
+          <td>{{ aplicacion.activo ? 'Sí' : 'No' }}</td>
+          <td>
+            <button class="btn btn-sm btn-info" (click)="editAplicacion(aplicacion)">Editar</button>
+            <button class="btn btn-sm btn-danger" (click)="deleteAplicacion(aplicacion.id)">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

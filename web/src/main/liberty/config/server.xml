@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<server description="CRUD Application Server">
+
+    <featureManager>
+        <feature>jakartaee-10.0</feature>
+        <feature>microProfile-6.1</feature>
+    </featureManager>
+
+    <httpEndpoint id="defaultHttpEndpoint"
+                  httpPort="9080"
+                  httpsPort="9443" />
+
+    <webApplication id="crud-app" location="crud-app.war" contextRoot="/">
+        <classloader apiTypeVisibility="+third-party"/>
+    </webApplication>
+
+    <!-- Development database configuration - For production, use persistent database -->
+    <dataSource id="crudDS" jndiName="jdbc/crudDS">
+        <jdbcDriver libraryRef="derby-lib"/>
+        <properties.derby.embedded databaseName="memory:crudDB" createDatabase="create"/>
+    </dataSource>
+
+    <library id="derby-lib">
+        <fileset dir="${server.config.dir}/derby" includes="*.jar"/>
+    </library>
+
+    <cors domain="/"
+          allowedOrigins="http://localhost:4200"
+          allowedMethods="GET, DELETE, POST, PUT"
+          allowedHeaders="*"
+          allowCredentials="true"
+          maxAge="3600" />
+</server>
