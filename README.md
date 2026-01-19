@@ -1,10 +1,10 @@
 # CRUD Application - Jakarta EE 10 + Angular 19
 
-Enterprise-grade CRUD application built with Java 21, Jakarta EE 10, and Angular 19, following Clean Architecture principles.
+Enterprise-grade CRUD application built with Java 17, Jakarta EE 10, and Angular 19, following Clean Architecture principles.
 
 ## Architecture
 
-### Backend (Java 21 + Jakarta EE 10)
+### Backend (Java 17 + Jakarta EE 10)
 The backend follows Clean Architecture principles with the following layers:
 
 - **Domain Layer**: Contains entities (Usuario, Perfil, Aplicacion, Seccion, Autoriz) and repository interfaces
@@ -28,7 +28,7 @@ The backend follows Clean Architecture principles with the following layers:
 
 ## Prerequisites
 
-- Java 21 or higher
+- Java 17 or higher
 - Maven 3.8+
 - Node.js 18+ and npm
 - Open Liberty Server (configured in the project)
@@ -120,7 +120,7 @@ All endpoints are prefixed with `/api`
 ## Technologies Used
 
 ### Backend
-- Java 21
+- Java 17
 - Jakarta EE 10
 - MicroProfile 6.1
 - JPA/Hibernate
